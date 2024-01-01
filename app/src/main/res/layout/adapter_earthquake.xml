@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="earthquake"
+            type="it.serverbooster.app.earthquakes.model.Earthquake" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="8dp">
+
+            <LinearLayout
+                android:id="@+id/layoutLinear"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="8dp">
+
+                <TextView
+                    android:id="@+id/textEarthquakeTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:text="@{earthquake.title.toString()}"
+                    tools:text="Earthquake title" />
+
+                <TextView
+                    android:id="@+id/textEarthquakeMagnitude"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@{earthquake.magnitude.toString()}"
+                    tools:text="Earthquake magnitude" />
+
+                <TextView
+                    android:id="@+id/textEarthquakeTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@{earthquake.time.toString()}"
+                    tools:text="Earthquake time" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+</layout>
