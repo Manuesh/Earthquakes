@@ -44,7 +44,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Locatio
 
     private Marker marker;
 
-    private List<Marker> markers = new ArrayList<>();
+    private List<Marker> earthquakeMarkers = new ArrayList<>();
 
     private List<Earthquake> earthquakes = new ArrayList<>();
 
@@ -144,6 +144,13 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Locatio
             marker.setPosition(currentPosition);
         }
 
+        if(!earthquakeMarkers.isEmpty()){
+            for (Marker marker : earthquakeMarkers) {
+                marker.remove();
+            }
+        }
+
+        earthquakeMarkers.clear();
 
         new Thread(() -> {
             if (!earthquakes.isEmpty()) {
@@ -152,7 +159,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Locatio
                     earthquakeLocation.setLatitude(earthquake.getLatitude());
                     earthquakeLocation.setLongitude(earthquake.getLongitude());
 
-                    if (earthquakeLocation.distanceTo(location) <= 200000) {
+                    if (earthquakeLocation.distanceTo(location) <= 100000) {
                         bounds.include(new LatLng(earthquake.getLatitude(), earthquake.getLongitude()));
                         createEarthquake(earthquake);
                     }
@@ -181,7 +188,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Locatio
         requireActivity().runOnUiThread(() -> {
             Marker marker = map.addMarker(options);
             marker.setTag(earthquake);
-            markers.add(marker);
+            earthquakeMarkers.add(marker);
         });
     }
 
