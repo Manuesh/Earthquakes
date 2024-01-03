@@ -36,14 +36,14 @@
                     android:id="@+id/textEarthquakeMagnitude"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@{earthquake.magnitude.toString()}"
+                    android:text="@{`Magnitude:\t` +earthquake.magnitude.toString()}"
                     tools:text="Earthquake magnitude" />
 
                 <TextView
                     android:id="@+id/textEarthquakeTime"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@{earthquake.time.toString()}"
+                    android:text="@{`Date:\t` +earthquake.time.toString()}"
                     tools:text="Earthquake time" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
