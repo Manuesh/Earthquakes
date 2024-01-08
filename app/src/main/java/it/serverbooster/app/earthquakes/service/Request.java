@@ -55,7 +55,7 @@ public class Request {
 
     public String getMonthlyResults(){
         String queryPiece = "&starttime=";
-        LocalDate now = LocalDate.now().minusMonths(1);
+        LocalDate now = LocalDate.now().minusMonths(2);
         queryPiece += now.toString();
         return queryPiece;
     }

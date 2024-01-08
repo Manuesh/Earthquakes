@@ -155,14 +155,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Locatio
         new Thread(() -> {
             if (!earthquakes.isEmpty()) {
                 for (Earthquake earthquake : earthquakes) {
-                    Location earthquakeLocation = new Location("Earthquake");
-                    earthquakeLocation.setLatitude(earthquake.getLatitude());
-                    earthquakeLocation.setLongitude(earthquake.getLongitude());
-
-                    if (earthquakeLocation.distanceTo(location) <= 1000000) {
-                        bounds.include(new LatLng(earthquake.getLatitude(), earthquake.getLongitude()));
-                        createEarthquake(earthquake);
-                    }
+                    bounds.include(new LatLng(earthquake.getLatitude(), earthquake.getLongitude()));
+                    createEarthquake(earthquake);
                 }
             }
 
