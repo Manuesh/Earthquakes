@@ -159,7 +159,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Locatio
                     earthquakeLocation.setLatitude(earthquake.getLatitude());
                     earthquakeLocation.setLongitude(earthquake.getLongitude());
 
-                    if (earthquakeLocation.distanceTo(location) <= 100000) {
+                    if (earthquakeLocation.distanceTo(location) <= 1000000) {
                         bounds.include(new LatLng(earthquake.getLatitude(), earthquake.getLongitude()));
                         createEarthquake(earthquake);
                     }

@@ -2,8 +2,6 @@ package it.serverbooster.app.earthquakes.service;
 
 import android.content.Context;
 
-import com.google.android.gms.maps.model.LatLng;
-
 import org.chromium.net.CronetEngine;
 import org.chromium.net.CronetException;
 import org.chromium.net.UrlRequest;
@@ -14,7 +12,6 @@ import java.nio.ByteBuffer;
 import java.nio.channels.Channels;
 import java.nio.channels.WritableByteChannel;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
@@ -44,16 +41,23 @@ public class Request {
     }
 
 
-
     private CronetEngine cronetEngine;
 
     private final Executor executor = Executors.newSingleThreadExecutor();
 
     public void requestDownload(RequestCallback callback){
-        String url = "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&orderby=time";
+        String url = "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&latitude=41.8719&longitude=12.5674&maxradius=5";
+        url += this.getMonthlyResults();
         cronetEngine.newUrlRequestBuilder(url, callback, executor)
                 .build()
                 .start();
+    }
+
+    public String getMonthlyResults(){
+        String queryPiece = "&starttime=";
+        LocalDate now = LocalDate.now().minusMonths(1);
+        queryPiece += now.toString();
+        return queryPiece;
     }
 
 
