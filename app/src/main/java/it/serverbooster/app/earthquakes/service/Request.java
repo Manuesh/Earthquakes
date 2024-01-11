@@ -47,13 +47,13 @@ public class Request {
 
     public void requestDownload(RequestCallback callback){
         String url = "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&latitude=41.8719&longitude=12.5674&maxradius=5";
-        url += this.getMonthlyResults();
+        url += this.generateDateInterval();
         cronetEngine.newUrlRequestBuilder(url, callback, executor)
                 .build()
                 .start();
     }
 
-    public String getMonthlyResults(){
+    public String generateDateInterval(){
         String queryPiece = "&starttime=";
         LocalDate now = LocalDate.now().minusYears(1);
         queryPiece += now.toString();

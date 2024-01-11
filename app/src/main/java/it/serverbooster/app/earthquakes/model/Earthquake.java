@@ -38,6 +38,7 @@ public class Earthquake implements Serializable {
         return earthquake;
     }
 
+
     private Double magnitude;
 
     private String place;

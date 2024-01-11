@@ -77,7 +77,47 @@ public class MainViewModel extends AndroidViewModel {
 
     }
 
+    private void refresh() {
+        new Thread(() -> {
+            repository.downloadData(getApplication(), new Request.RequestCallback() {
+
+                @Override
+                public void onCompleted(UrlRequest request, UrlResponseInfo info, byte[] data, CronetException error) {
+
+                    List<Earthquake> tempEarthquakes = new ArrayList<>();
+
+                    if (data != null) {
+                        String response = new String(data);
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            JSONArray features = jsonObject.optJSONArray("features");
+                            for (int i = 0; i < features.length(); i++) {
+                                JSONObject feature = features.optJSONObject(i);
+                                Earthquake earthquake = Earthquake.parseJson(feature);;
+                                tempEarthquakes.add(earthquake);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    } else {
+                        if (error != null) {
+                            error.printStackTrace();
+                        }
+                    }
+                    DB.getInstance(getApplication()).getEarthquakesDAO().insert(tempEarthquakes);
+                    earthquakes.postValue(tempEarthquakes);
+                }
+
+            });
+        }).start();
+    }
+
     public LiveData<List<Earthquake>> getEarthquakes() {
+        return earthquakes;
+    }
+
+    public LiveData<List<Earthquake>> getRefreshedEarthquakes() {
+        refresh();
         return earthquakes;
     }
 
