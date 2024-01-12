@@ -16,6 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="8dp"
+            app:cardBackgroundColor="@color/material_dynamic_neutral20"
             app:cardCornerRadius="15dp">
 
             <LinearLayout
@@ -32,6 +33,7 @@
                     android:text="@{earthquake.title.toString()}"
                     android:textSize="20sp"
                     android:textStyle="bold"
+                    android:textColor="@color/material_dynamic_neutral90"
                     tools:text="Earthquake title" />
 
                 <TextView
@@ -39,6 +41,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@{`Magnitude:\t` +earthquake.magnitude.toString()}"
+                    android:textColor="@color/material_dynamic_neutral90"
                     tools:text="Earthquake magnitude" />
 
                 <TextView
@@ -46,6 +49,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@{`Date:\t` +earthquake.time.toString()}"
+                    android:textColor="@color/material_dynamic_neutral90"
                     tools:text="Earthquake time" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
