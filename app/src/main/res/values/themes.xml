@@ -11,7 +11,7 @@
         <item name = "android:colorPrimary">@color/material_dynamic_neutral10</item>
         <item name = "android:colorSecondary">@color/material_dynamic_neutral10</item>
         <item name = "android:colorError">@color/material_dynamic_neutral10</item>
-        <item name="colorSecondaryContainer">@color/material_dynamic_neutral20</item>
+        <item name = "colorSecondaryContainer">@color/material_dynamic_neutral20</item>
     </style>
 
     <style name="Theme.Earthquakes" parent="Base.Theme.Earthquakes" />

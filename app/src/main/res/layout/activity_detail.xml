@@ -119,5 +119,22 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textEarthquakeLongitude"
             tools:text="Earthquake url" />
+
+        <Button
+            android:id="@+id/shareButton"
+            style="@style/Widget.Material3.Button.ElevatedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/material_dynamic_neutral20"
+            android:text="Share"
+            android:textColor="@color/material_dynamic_neutral90"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textEarthquakeMagnitude"
+            app:layout_constraintVertical_bias="0.34" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
