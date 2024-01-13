@@ -117,7 +117,7 @@ public class MainViewModel extends AndroidViewModel {
     }
 
     public LiveData<List<Earthquake>> getRefreshedEarthquakes() {
-        refresh();
+        this.refresh();
         return earthquakes;
     }
 

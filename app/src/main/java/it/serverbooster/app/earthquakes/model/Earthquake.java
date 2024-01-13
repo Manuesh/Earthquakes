@@ -9,10 +9,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.Serializable;
+import java.util.Comparator;
 import java.util.Date;
 
 @Entity(tableName = "earthquakes")
-public class Earthquake implements Serializable {
+public class Earthquake implements Serializable, Comparator<Earthquake> {
 
     public static Earthquake parseJson(JSONObject feature) {
 
@@ -120,4 +121,9 @@ public class Earthquake implements Serializable {
     public void setId(String id) {
         this.id = id;
     }
+
+    public int compare(Earthquake e1, Earthquake e2) {
+        return e1.getTime().compareTo(e2.getTime());
+    }
+
 }
