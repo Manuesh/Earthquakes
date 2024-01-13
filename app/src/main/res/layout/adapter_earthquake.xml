@@ -48,7 +48,7 @@
                     android:id="@+id/textEarthquakeTime"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@{`Date:\t` +earthquake.time.toString()}"
+                    android:text="@{`Date:\t\t` +earthquake.time.toString()}"
                     android:textColor="@color/material_dynamic_neutral90"
                     tools:text="Earthquake time" />
 
