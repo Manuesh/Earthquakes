@@ -3,7 +3,7 @@
     <style name="Base.Theme.Earthquakes" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
-        <item name = "android:navigationBarColor">@color/material_dynamic_neutral10</item>
+        <item name = "android:navigationBarColor">@color/material_dynamic_neutral20</item>
         <item name = "android:statusBarColor">@color/material_dynamic_neutral10</item>
         <item name = "android:colorBackground">@color/material_dynamic_neutral10</item>
         <item name = "android:colorForeground">@color/material_dynamic_neutral10</item>
@@ -11,7 +11,7 @@
         <item name = "android:colorPrimary">@color/material_dynamic_neutral10</item>
         <item name = "android:colorSecondary">@color/material_dynamic_neutral10</item>
         <item name = "android:colorError">@color/material_dynamic_neutral10</item>
-        <item name = "colorSecondaryContainer">@color/material_dynamic_neutral20</item>
+        <item name = "colorSecondaryContainer">@color/material_dynamic_neutral30</item>
     </style>
 
     <style name="Theme.Earthquakes" parent="Base.Theme.Earthquakes" />
