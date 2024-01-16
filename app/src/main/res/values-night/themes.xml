@@ -13,5 +13,7 @@
         <item name = "android:colorError">@color/material_dynamic_neutral10</item>
         <item name = "colorSecondaryContainer">@color/material_dynamic_neutral20</item>
         <item name = "android:textColorHighlight">@color/material_dynamic_neutral20</item>
+        <item name= "searchViewStyle">@style/Widget.AppCompat.SearchView.ActionBar</item>
     </style>
+
 </resources>
