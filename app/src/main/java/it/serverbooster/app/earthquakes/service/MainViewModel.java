@@ -16,6 +16,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import it.serverbooster.app.earthquakes.Earthquakes;
 import it.serverbooster.app.earthquakes.database.DB;
@@ -119,6 +121,23 @@ public class MainViewModel extends AndroidViewModel {
     public LiveData<List<Earthquake>> getRefreshedEarthquakes() {
         this.refresh();
         return earthquakes;
+    }
+
+    public LiveData<List<Earthquake>> searchEarthquakes(String query) {
+        MutableLiveData<List<Earthquake>> queryEarthquakes = new MutableLiveData<>();
+        if(query.isEmpty()) {
+            queryEarthquakes.setValue(new ArrayList<>());
+            return queryEarthquakes;
+        };
+
+        new Thread(() -> {
+            List<Earthquake> list = DB.getInstance(getApplication()).getEarthquakesDAO().findAll();
+            Stream<Earthquake> stream = list.stream().filter(earthquake -> earthquake.getPlace().toLowerCase().contains(query.toLowerCase()));
+            list = stream.collect(Collectors.toList());
+            queryEarthquakes.postValue(list);
+        }).start();
+
+        return queryEarthquakes;
     }
 
 }

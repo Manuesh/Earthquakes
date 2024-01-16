@@ -4,12 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/menu_list">
-
     <fragment
         android:id="@+id/menu_list"
         android:name="it.serverbooster.app.earthquakes.ListFragment"
-        tools:layout="@layout/fragment_list"
-        android:label="ListFragment" >
+        android:label="ListFragment"
+        tools:layout="@layout/fragment_list">
+        <action
+            android:id="@+id/action_menu_list_to_detailActivity"
+            app:destination="@id/detailActivity" />
+    </fragment>
+    <fragment
+        android:id="@+id/menu_search"
+        android:name="it.serverbooster.app.earthquakes.SearchFragment"
+        android:label="SearchFragment"
+        tools:layout="@layout/fragment_search">
         <action
             android:id="@+id/action_menu_list_to_detailActivity"
             app:destination="@id/detailActivity" />
@@ -17,15 +25,16 @@
     <fragment
         android:id="@+id/menu_map"
         android:name="it.serverbooster.app.earthquakes.MapFragment"
-        tools:layout="@layout/fragment_map"
-        android:label="MapFragment" >
+        android:label="MapFragment"
+        tools:layout="@layout/fragment_map">
         <action
             android:id="@+id/action_menu_map_to_detailActivity"
             app:destination="@id/detailActivity" />
     </fragment>
     <activity
         android:id="@+id/detailActivity"
-        tools:layout="@layout/activity_detail"
         android:name="it.serverbooster.app.earthquakes.DetailActivity"
-        android:label="DetailActivity" />
+        android:label="DetailActivity"
+        tools:layout="@layout/activity_detail" />
+
 </navigation>

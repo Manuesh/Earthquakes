@@ -7,29 +7,33 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.android.material.search.SearchBar;
-import com.google.android.material.search.SearchView;
 
 import java.util.List;
 
 import it.serverbooster.app.earthquakes.databinding.FragmentListBinding;
+import it.serverbooster.app.earthquakes.databinding.FragmentSearchBinding;
 import it.serverbooster.app.earthquakes.model.Earthquake;
 import it.serverbooster.app.earthquakes.service.MainViewModel;
 
-public class ListFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
+public class SearchFragment extends Fragment {
 
-    private FragmentListBinding binding;
+    private FragmentSearchBinding binding;
+
+    private SearchView searchView;
+
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        binding = FragmentListBinding.inflate(inflater, container, false);
+        binding = FragmentSearchBinding.inflate(inflater, container, false);
+        searchView = binding.searchView;
         return binding.getRoot();
     }
 
@@ -42,28 +46,33 @@ public class ListFragment extends Fragment implements SwipeRefreshLayout.OnRefre
 
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
 
-        binding.swipeRefreshLayout.setOnRefreshListener(this::onRefresh);
-
-        mainViewModel.getEarthquakes().observe(getViewLifecycleOwner(), new Observer<List<Earthquake>>() {
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
-            public void onChanged(List<Earthquake> earthquakes) {
-                binding.recyclerView.setAdapter(new EarthquakeAdapter(earthquakes));
+            public boolean onQueryTextSubmit(String query) {
+
+                mainViewModel.searchEarthquakes(query).observe(getViewLifecycleOwner(), new Observer<List<Earthquake>>() {
+                    @Override
+                    public void onChanged(List<Earthquake> earthquakes) {
+                        binding.recyclerView.setAdapter(new EarthquakeAdapter(earthquakes));
+                    }
+                });
+                return true;
             }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+
+                mainViewModel.searchEarthquakes(newText).observe(getViewLifecycleOwner(), new Observer<List<Earthquake>>() {
+                    @Override
+                    public void onChanged(List<Earthquake> earthquakes) {
+                        binding.recyclerView.setAdapter(new EarthquakeAdapter(earthquakes));
+                    }
+                });
+                return true;
+            }
+
         });
+
     }
 
-    @Override
-    public void onRefresh() {
-
-        MainViewModel mainViewModel = new ViewModelProvider(requireActivity())
-                .get(MainViewModel.class);
-        mainViewModel.getRefreshedEarthquakes().observe(getViewLifecycleOwner(), new Observer<List<Earthquake>>() {
-            @Override
-            public void onChanged(List<Earthquake> earthquakes) {
-                binding.recyclerView.setAdapter(new EarthquakeAdapter(earthquakes));
-            }
-        });
-
-        binding.swipeRefreshLayout.setRefreshing(false);
-    }
 }

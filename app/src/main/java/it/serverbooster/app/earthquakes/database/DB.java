@@ -8,7 +8,7 @@ import androidx.room.RoomDatabase;
 
 import it.serverbooster.app.earthquakes.model.Earthquake;
 
-@Database(entities = { Earthquake.class }, version = 3)
+@Database(entities = { Earthquake.class }, version = 5)
 public abstract class DB extends RoomDatabase {
 
     public abstract EarthquakesDAO getEarthquakesDAO();

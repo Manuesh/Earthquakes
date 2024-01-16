@@ -4,4 +4,6 @@
     <string name="map">Map</string>
     <string name="location_required">Location required!</string>
     <string name="textview">TextView</string>
+    <string name="search">Search</string>
+    <string name="search_earthquakes">Search earthquakes</string>
 </resources>
