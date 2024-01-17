@@ -31,10 +31,4 @@
             tools:listitem="@layout/adapter_earthquake" />
 
 
-
-
-
-
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

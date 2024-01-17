@@ -49,6 +49,7 @@ public class SearchFragment extends Fragment {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+                searchView.clearFocus();
 
                 mainViewModel.searchEarthquakes(query).observe(getViewLifecycleOwner(), new Observer<List<Earthquake>>() {
                     @Override
@@ -56,6 +57,7 @@ public class SearchFragment extends Fragment {
                         binding.recyclerView.setAdapter(new EarthquakeAdapter(earthquakes));
                     }
                 });
+
                 return true;
             }
 
@@ -68,6 +70,7 @@ public class SearchFragment extends Fragment {
                         binding.recyclerView.setAdapter(new EarthquakeAdapter(earthquakes));
                     }
                 });
+
                 return true;
             }
 
