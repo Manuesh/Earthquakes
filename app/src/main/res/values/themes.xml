@@ -16,7 +16,6 @@
         <item name = "android:colorControlActivated">@color/material_dynamic_neutral40</item>
         <item name = "android:colorControlHighlight">@color/material_dynamic_neutral30</item>
         <item name = "android:colorControlNormal">@color/material_dynamic_neutral30</item>
-        <item name = "searchViewStyle">@style/Widget.AppCompat.SearchView.ActionBar</item>
     </style>
 
     <style name="Theme.Earthquakes" parent="Base.Theme.Earthquakes" />

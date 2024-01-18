@@ -1,5 +1,7 @@
 package it.serverbooster.app.earthquakes;
 
+import android.annotation.SuppressLint;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,15 +20,24 @@ public class EarthquakeAdapter extends RecyclerView.Adapter<EarthquakeAdapter.Vi
 
     private List<Earthquake> data;
 
+    private boolean flag;
+
     public EarthquakeAdapter(List<Earthquake> data) {
         this.data = data;
+        this.flag = true;
     }
+
+    public EarthquakeAdapter(List<Earthquake> data, boolean flag) {
+        this.data = data;
+        this.flag = false;
+    }
+
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         AdapterEarthquakeBinding binding = AdapterEarthquakeBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
-        return new ViewHolder(binding);
+        return new ViewHolder(binding, flag);
     }
 
     @Override
@@ -44,10 +55,17 @@ public class EarthquakeAdapter extends RecyclerView.Adapter<EarthquakeAdapter.Vi
 
         private AdapterEarthquakeBinding binding;
 
-        public ViewHolder(AdapterEarthquakeBinding binding) {
+
+        public ViewHolder(AdapterEarthquakeBinding binding, boolean flag) {
             super(binding.getRoot());
             this.binding = binding;
             this.binding.layoutLinear.setOnClickListener(this);
+
+            if(flag == false) {
+                this.binding.cardView.setCardBackgroundColor(this.binding.cardView.getResources().getColor(R.color.material1));
+            } else {
+                this.binding.cardView.setCardBackgroundColor(this.binding.cardView.getResources().getColor(R.color.material2));
+            }
         }
 
         @Override

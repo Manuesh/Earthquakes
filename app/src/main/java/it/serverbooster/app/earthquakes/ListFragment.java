@@ -1,10 +1,13 @@
 package it.serverbooster.app.earthquakes;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -26,10 +29,20 @@ public class ListFragment extends Fragment implements SwipeRefreshLayout.OnRefre
 
     private FragmentListBinding binding;
 
+    private SearchView searchView;
+
+    private SearchBar searchBar;
+
+    private OnBackPressedCallback onBackPressedCallback;
+
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentListBinding.inflate(inflater, container, false);
+        searchBar = binding.searchBar;
+        searchView = binding.searchView;
+        searchView.setupWithSearchBar(searchBar);
         return binding.getRoot();
     }
 
@@ -50,6 +63,53 @@ public class ListFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                 binding.recyclerView.setAdapter(new EarthquakeAdapter(earthquakes));
             }
         });
+
+        binding.searchRecyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
+
+
+        searchBar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressedCallback.setEnabled(true);
+                searchView.show();
+            }
+        });
+
+        searchView.getEditText().addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                mainViewModel.searchEarthquakes(s.toString()).observe(getViewLifecycleOwner(), new Observer<List<Earthquake>>() {
+                    @Override
+                    public void onChanged(List<Earthquake> earthquakes) {
+                        binding.searchRecyclerView.setAdapter(new EarthquakeAdapter(earthquakes, false));
+                    }
+                });
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        onBackPressedCallback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                if (searchView.isShowing()) {
+                    searchView.hide();
+                } else {
+                    setEnabled(false);
+                    requireActivity().onBackPressed();
+                }
+            }
+        };
+
+        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), onBackPressedCallback);
     }
 
     @Override

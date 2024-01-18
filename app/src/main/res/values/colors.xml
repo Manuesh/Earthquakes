@@ -2,4 +2,6 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="material1">@color/material_dynamic_neutral10</color>
+    <color name="material2">@color/material_dynamic_neutral20</color>
 </resources>

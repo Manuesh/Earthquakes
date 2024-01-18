@@ -14,15 +14,6 @@
             app:destination="@id/detailActivity" />
     </fragment>
     <fragment
-        android:id="@+id/menu_search"
-        android:name="it.serverbooster.app.earthquakes.SearchFragment"
-        android:label="SearchFragment"
-        tools:layout="@layout/fragment_search">
-        <action
-            android:id="@+id/action_menu_list_to_detailActivity"
-            app:destination="@id/detailActivity" />
-    </fragment>
-    <fragment
         android:id="@+id/menu_map"
         android:name="it.serverbooster.app.earthquakes.MapFragment"
         android:label="MapFragment"
