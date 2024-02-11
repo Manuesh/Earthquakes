@@ -10,4 +10,4 @@ As the name says is an app to **track earthquakes** around Italy and is in fact 
 
 ## Compatibility
 Well the app has been developed for Android 8.0 Oreo (API 26) or newer but since I used Material Design 3
-to build a dynamic theme for the app, I recommend using at least Android 10.
+and I tested it on several devices, I noticed that the compatibility seems restricted to Android 13 or further.
